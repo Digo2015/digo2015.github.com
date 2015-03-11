@@ -30,7 +30,7 @@ description:
 7. [GetShippingRate]({{ BASE_PATH }}#GetShippingRate) ：根据包裹重量、保险、运输服务等获取运费信息。
 8. [VerifyUser]({{ BASE_PATH }}#VerifyUser) ：验证API授权是否成功。
 9. [GetTracking]({{ BASE_PATH }}#GetTracking)：根据ProcessCode获取包裹轨迹信息。
-
+10. [GetShippingServices]({{ BASE_PATH }}#GetShippingServices)：获取发货产品服务信息。
 
     
 ## 接入点
@@ -102,7 +102,22 @@ description:
 <td><a class="reference internal" href="#Address"><em>Address</em></a></td>
 <td>必须</td>
 <td>收件人地址信息</td>
-<td></td>
+<td>
+ {
+"Company": "公司名称",
+"Street1": "街道1",
+"Street2": "街道2",
+"Street3": "",
+"City": "城市",
+"Province": "省或州",
+"Country": "国家",
+"CountryCode": "CN",
+"Postcode": "邮编",
+"Contacter": "联系人",
+"Tel": "电话",
+"Email": "邮箱地址"
+}
+</td>
 </tr>
 <tr class="row-even">
 <td>WeightInKG</td>
@@ -163,9 +178,9 @@ description:
 <tr class="row-even">
 <td>ShippingMethod</td>
 <td>string</td>
-<td></td>
-<td>发货方式</td>
-<td></td>
+<td>必须</td>
+<td>发货产品服务代码</td>
+<td>如:REGPOST</td>
 </tr>
 <tr class="row-odd">
 <td>ItemType</td>
@@ -347,6 +362,158 @@ description:
 </div>
 </div>
 
+## 取消并删除
+
+功能：根据处理号,取消并删除“交运”前的包裹信息。
+<div class="section" id="request">
+<a name="CancelPackage"></a>
+<h4>Request URL</h4>
+<p>GET /api/parcels/{processCode}/cancellation</P>
+<h4>Request Headers</h4>
+<div class="wy-table-responsive">
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%">
+<col width="40%">
+<col width="40%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd">
+<th class="head">名称</th>
+<th class="head">值</th>
+<th class="head">说明</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even">
+<td>Authorization</td>
+<td>Hc-OweDeveloper DX;123456;nounce123</td>
+<td>开发者验证字符串</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4>Request</h4>
+<div class="wy-table-responsive">
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%">
+<col width="10%">
+<col width="13%">
+<col width="23%">
+<col width="43%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd">
+<th class="head">名称</th>
+<th class="head">类型</th>
+<th class="head">是否必须</th>
+<th class="head">描述</th>
+<th class="head">示例值</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even">
+<td>processCode</td>
+<td>String</td>
+<td>必须</td>
+<td>包裹处理号</td>
+<td>OW1503061000001</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+### 响应结果
+
+	{
+	    "Data": {
+	        "Version": "v1",
+	        "Ack": "Failure",
+	        "Message": "Failure",
+	        "Timestamp": "0001-01-01T00:00:00"
+	    },
+	    "Succeeded": true,
+	    "Error": null
+	}
+
+## 确定包裹进行“交运”操作
+
+功能：根据处理号,对已上传包裹进行“交运”操作。
+<div class="section" id="request">
+<a name="ConfirmPackage"></a>
+<h4>Request URL</h4>
+<p>GET api/Parcels/{processCode}/confirmation</P>
+<h4>Request Headers</h4>
+<div class="wy-table-responsive">
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%">
+<col width="40%">
+<col width="40%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd">
+<th class="head">名称</th>
+<th class="head">值</th>
+<th class="head">说明</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even">
+<td>Authorization</td>
+<td>Hc-OweDeveloper DX;123456;nounce123</td>
+<td>开发者验证字符串</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4>Request</h4>
+<div class="wy-table-responsive">
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%">
+<col width="10%">
+<col width="13%">
+<col width="23%">
+<col width="43%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd">
+<th class="head">名称</th>
+<th class="head">类型</th>
+<th class="head">是否必须</th>
+<th class="head">描述</th>
+<th class="head">示例值</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even">
+<td>processCode</td>
+<td>String</td>
+<td>必须</td>
+<td>包裹处理号</td>
+<td>OW1503061000001</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+### 响应结果
+
+	{
+    "Data": {
+        "Version": "V1",
+        "Ack": "Success",
+        "Message": "",
+        "Timestamp": "2015-03-11T15:21:24.746053Z"
+    },
+    "Succeeded": true,
+    "Error": null
+	}
+
 ## 获取已上传包裹详细信息。
 
 功能：根据处理号,获取已上传包裹详细信息。
@@ -461,9 +628,16 @@ description:
 </tr>
 <tr class="row-odd">
 <td>Status</td>
-<td><a class="reference internal" href="#ParcelStatus"><em>ParcelStatus</em></a></td>
-<td>收件人地址信息</td>
-<td></td>
+<td>string</td>
+<td>包裹状态</td>
+<td>
+Original = 初始状态,
+InSock = 己入库,
+Shipped = 己发货,
+Transfer = 运输中,
+Abnormal = 异常,
+DepartFromPort = 己离港,
+Cancel = 己取消</td>
 </tr>
 <tr class="row-even">
 <td>RealWeightInKG</td>
@@ -533,7 +707,7 @@ description:
 </tr>
 <tr class="row-odd">
 <td>ItemType</td>
-<td><a class="reference internal" href="#ItemType"><em>ItemType</em></a></td>
+<td>string</td>
 <td>包裹类型</td>
 <td>DOC,SPX</td>
 </tr>
@@ -690,47 +864,126 @@ description:
 <div class="section" id="request">
 <a name="VerifyUser"></a>
 <h4>Request URL</h4>
-<p>GET /api/VerifyUser</P>
-<h4>Request</h4>
+<p>GET api/whoami</P>
+<h4>Request Headers</h4>
 <div class="wy-table-responsive">
 <table border="1" class="docutils">
 <colgroup>
-	<col width="11%">
-	<col width="10%">
-	<col width="13%">
-	<col width="23%">
-	<col width="43%">
+<col width="11%">
+<col width="10%">
+<col width="13%">
+<col width="23%">
+<col width="43%">
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd">
-	<th class="head">名称</th>
-	<th class="head">类型</th>
-	<th class="head">是否必须</th>
-	<th class="head">描述</th>
-	<th class="head">示例值</th>
+<th class="head">名称</th>
+<th class="head">类型</th>
+<th class="head">是否必须</th>
+<th class="head">描述</th>
+<th class="head">示例值</th>
 </tr>
 </thead>
 <tbody valign="top">
 <tr class="row-even">
-<td>Token</td>
+<td>Authorization</td>
 <td>String</td>
 <td>必须</td>
 <td>开发者验证字符串</td>
-<td>887E99B5F89BB18BEA12B204B620D236</td>
+<td>Hc-OweDeveloper DX;123456;nounce123</td>
 </tr>
+</tbody>
+</table></div>
+</div>
+
+<div class="section" id="response">
+<h4>Response</h4>
+<div class="wy-table-responsive">
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%">
+<col width="33%">
+<col width="37%">
+<col width="18%">
+</colgroup>
+<thead valign="bottom">
 <tr class="row-odd">
-<td>UserKey</td>
-<td>String</td>
-<td>必须</td>
-<td>用户验证字符串</td>
-<td>wr5qjqh4gj</td>
+<th class="head">名称</th>
+<th class="head">类型</th>
+<th class="head">描述</th>
+<th class="head">示例值</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even">
+<td>Data</td>
+<td>string</td>
+<td>数据对象</td>
+<td>DX</td>
 </tr>
 <tr class="row-even">
-<td>UserID</td>
+<td>Version</td>
+<td>string</td>
+<td>API调用版本</td>
+<td>V1</td>
+</tr>
+<tr class="row-even">
+<td>Ack</td>
+<td><a class="reference internal" href="#enumack"><em>EnumAck</em></a></td>
+<td>返回操作是否成功</td>
+<td>Success</td>
+</tr>
+<tr class="row-even">
+<td>Message</td>
+<td>string</td>
+<td>返回操作结果消息</td>
+<td>失败返回错误消息</td>
+</tr>
+<tr class="row-even">
+<td>Timestamp</td>
+<td>datetime</td>
+<td>调用时间(UTC)</td>
+<td>2015-03-06T04:00:26.503+0000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+## 获取发货产品服务接口
+
+功能：获取可发货的产品服务信息。
+<div class="section" id="request">
+<a name="GetShippingServices"></a>
+<h4>Request URL</h4>
+<p>GET api/services</P>
+<h4>Request Headers</h4>
+<div class="wy-table-responsive">
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%">
+<col width="10%">
+<col width="13%">
+<col width="23%">
+<col width="43%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd">
+<th class="head">名称</th>
+<th class="head">类型</th>
+<th class="head">是否必须</th>
+<th class="head">描述</th>
+<th class="head">示例值</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even">
+<td>Authorization</td>
 <td>String</td>
 <td>必须</td>
-<td>用户登陆名</td>
-<td>guest</td>
+<td>开发者验证字符串</td>
+<td>Hc-OweDeveloper DX;123456;nounce123</td>
 </tr>
 </tbody>
 </table></div>
@@ -755,6 +1008,13 @@ description:
 </tr>
 </thead>
 <tbody valign="top">
+<tr class="row-even">
+	<td>ShippingMethods</td>
+	<td><a class="reference internal" href="#ShippingMethod"><em>ShippingMethod</em></a>[]</td>
+	<td>产品服务</td>
+	<td>V1</td>
+</tr>
+
 <tr class="row-even">
 	<td>Version</td>
 	<td>string</td>
@@ -783,6 +1043,37 @@ description:
 </table>
 </div>
 </div>
+
+### 响应结果
+	{
+    "Data": {
+        "ShippingMethods": [
+            {
+                "Code": "EURBTOC",
+                "Name": "B2C",
+                "IsTracking": true,
+                "ISVolumeWeight": true,
+                "MaxVolumeWeightInCM": 0,
+                "MaxWeightInKG": null
+            },
+            ......
+            {
+                "Code": "2S",
+                "Name": "Hermes ",
+                "IsTracking": true,
+                "ISVolumeWeight": false,
+                "MaxVolumeWeightInCM": 0,
+                "MaxWeightInKG": 2
+            }
+        ],
+        "Version": null,
+        "Ack": "Success",
+        "Message": null,
+        "Timestamp": "0001-01-01T00:00:00"
+    },
+    "Succeeded": true,
+    "Error": null
+}
 
 ## 数据类型
 
@@ -855,7 +1146,7 @@ description:
 <td>String</td>
 <td>必须</td>
 <td>国家英文名称</td>
-<td></td>
+<td>美国</td>
 </tr>
 <tr class="row-odd">
 <td>CountryCode</td>
@@ -899,7 +1190,7 @@ description:
 
 
 <div class="section" id="request">
-    <a name="ItemDetail"></a>
+<a name="ItemDetail"></a>
 <h4>ItemDetail</h4>
 <div class="wy-table-responsive">
 <table border="1" class="docutils">
@@ -953,7 +1244,10 @@ description:
 <td><a class="reference internal" href="#Amount"><em>Amount</em></a></td>
 <td>必须</td>
 <td>申报价值</td>
-<td></td>
+<td>{
+"Currency": "USD",
+"Value": 15
+}</td>
 </tr>
 <tr class="row-odd">
 <td>WeightInKG</td>
@@ -1013,10 +1307,10 @@ description:
 <tbody valign="top">
 <tr class="row-even">
 <td>Currency</td>
-<td>int</td>
+<td>string</td>
 <td>必须</td>
 <td>货币类型</td>
-<td>0=USD, 1=GBP, 2=CNY</td>
+<td>USD, GBP, CNY</td>
 </tr>
 <tr class="row-odd">
 <td>Value</td>
@@ -1075,10 +1369,10 @@ description:
 </tr>
 <tr class="row-odd">
 <td>Unit</td>
-<td>int</td>
+<td>string</td>
 <td>必须</td>
 <td>计量单位</td>
-<td>0=CM, 1=M</td>
+<td>CM=厘米, M=米</td>
 </tr>
 
 </tbody>
@@ -1129,6 +1423,76 @@ description:
 <td>体积</td>
 <td></td>
 </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="section" id="request">
+<a name="ShippingMethod"></a>
+<h4>ShippingMethod</h4>
+<div class="wy-table-responsive">
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%">
+<col width="10%">
+<col width="13%">
+<col width="23%">
+<col width="43%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd">
+<th class="head">名称</th>
+<th class="head">类型</th>
+<th class="head">是否必须</th>
+<th class="head">描述</th>
+<th class="head">示例值</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even">
+<td>Code</td>
+<td>decimal</td>
+<td>必须</td>
+<td>服务代码</td>
+<td></td>
+</tr>
+<tr class="row-odd">
+<td>Name</td>
+<td>string</td>
+<td>必须</td>
+<td>服务名称</td>
+<td></td>
+</tr>
+<tr class="row-even">
+<td>IsTracking</td>
+<td>bool</td>
+<td>必须</td>
+<td>是否挂号</td>
+<td></td>
+</tr>
+<tr class="row-odd">
+<td>ISVolumeWeight</td>
+<td>bool</td>
+<td>必须</td>
+<td>是否计泡</td>
+<td></td>
+</tr>
+<tr class="row-even">
+<td>MaxVolumeWeightInCM</td>
+<td>decimal</td>
+<td>必须</td>
+<td>最大体积重量限制</td>
+<td></td>
+</tr>
+<tr class="row-odd">
+<td>MaxWeightInKG</td>
+<td>decimal</td>
+<td>必须</td>
+<td>最大重量限制(KG)</td>
+<td></td>
+</tr>
+
 </tbody>
 </table>
 </div>
