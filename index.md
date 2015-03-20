@@ -7,7 +7,6 @@ description:
 {% include JB/setup %}
 
 
-[使用教程](http://api.oneworldexpress.com/usages)
 
 ## API 对接指南
 
@@ -23,11 +22,11 @@ description:
 ### API列表
 
 1. [CreatePackage]({{ BASE_PATH }}#CreatePackage) ：上传一个包裹信息，同时申请一个包裹跟踪号。
-2. [CancelPackage]({{ BASE_PATH }}#CancelPackage) ：取消并删除“交运”前的包裹信息。
+2. [CancelPackage]({{ BASE_PATH }}#CancelPackage) ：取消“交运”前的包裹信息。
 3. [ConfirmPackage]({{ BASE_PATH }}#ConfirmPackage) ：对已上传包裹进行“交运”操作。
 4. [GetShippingLabel]({{ BASE_PATH }}#GetShippingLabel) ：获取已上传包裹打印标签流。
 5. [GetShippingPackage]({{ BASE_PATH }}#GetShippingPackage) ：获取已上传包裹详细信息。
-7. [GetShippingRate]({{ BASE_PATH }}#GetShippingRate) ：根据包裹重量、保险、运输服务等获取运费信息。
+7. [GetShippingRate]({{ BASE_PATH }}#GetShippingRate) ：根据包裹重量、运输服务等获取运费信息。
 8. [VerifyUser]({{ BASE_PATH }}#VerifyUser) ：验证API授权是否成功。
 9. [GetTracking]({{ BASE_PATH }}#GetTracking)：根据ProcessCode获取包裹轨迹信息。
 10. [GetShippingServices]({{ BASE_PATH }}#GetShippingServices)：获取发货产品服务信息。
@@ -35,9 +34,9 @@ description:
     
 ## 接入点
 
-沙盒测试地址为：http://api.oneworldexpress.com/sandbox/v1/
+沙盒测试地址为：http://api-sbx.oneworldexpress.cn/
 
-正式运作地址为：http://api.oneworldexpress.com/product/v1/
+正式运作地址为：http://api.oneworldexpress.cn/
 
 ### 创建包裹接口
 
@@ -64,7 +63,7 @@ description:
 <tbody valign="top">
 <tr class="row-even">
 <td>Authorization</td>
-<td>HC-DX;A;C</td>
+<td>Hc-OweDeveloper DX;123456;nounce123</td>
 <td>开发者验证字符串</td>
 </tr>
 </tbody>
@@ -156,10 +155,17 @@ description:
 </tr>
 <tr class="row-odd">
 <td>CubeSize</td>
-<td><a class="reference internal" href="#TotalVolume"><em>CubeSize</em></a></td>
+<td><a class="reference internal" href="#CubeSize"><em>CubeSize</em></a></td>
 <td>必须</td>
 <td>包裹尺寸(长*宽*高)</td>
 <td></td>
+</tr>
+<tr class="row-even">
+<td>DeliveryAddress</td>
+<td>string</td>
+<td>必须</td>
+<td>交货地点</td>
+<td>如:深圳</td>
 </tr>
 <tr class="row-even">
 <td>Notes</td>
@@ -275,6 +281,7 @@ description:
         "Height": 1,
         "Unit": "CM"
     },
+	"DeliveryAddress": "深圳",
     "Notes": "Test",
     "BatchNo": "",
     "ShippingMethod": "REGPOST",
@@ -362,9 +369,9 @@ description:
 </div>
 </div>
 
-## 取消并删除
+## 取消包裹发货
 
-功能：根据处理号,取消并删除“交运”前的包裹信息。
+功能：根据处理号,取消“交运”前的包裹信息。
 <div class="section" id="request">
 <a name="CancelPackage"></a>
 <h4>Request URL</h4>
