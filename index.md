@@ -31,6 +31,7 @@ description:
 9. [GetTracking]({{ BASE_PATH }}#GetTracking)：根据ProcessCode获取包裹轨迹信息。
 10. [GetShippingServices]({{ BASE_PATH }}#GetShippingServices)：获取发货产品服务信息。
 
+
     
 ## 接入点
 
@@ -432,6 +433,54 @@ description:
 </div>
 </div>
 
+<div class="section" id="response">
+<h4>Response</h4>
+<div class="wy-table-responsive">
+<table border="1" class="docutils">
+<colgroup>
+	<col width="12%">
+	<col width="33%">
+	<col width="37%">
+	<col width="18%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd">
+	<th class="head">名称</th>
+	<th class="head">类型</th>
+	<th class="head">描述</th>
+	<th class="head">示例值</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-odd">
+	<td>Version</td>
+	<td>string</td>
+	<td>API调用版本</td>
+	<td>V1</td>
+</tr>
+<tr class="row-even">
+	<td>Ack</td>
+	<td><a class="reference internal" href="#enumack"><em>EnumAck</em></a></td>
+	<td>返回操作是否成功</td>
+	<td>Success</td>
+</tr>
+<tr class="row-odd">
+	<td>Message</td>
+	<td>string</td>
+	<td>返回操作结果消息</td>
+	<td>失败返回错误消息</td>
+</tr>
+<tr class="row-even">
+	<td>Timestamp</td>
+	<td>datetime</td>
+	<td>调用时间(UTC)</td>
+	<td>2015-03-06T04:00:26.503+0000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
 ### 响应结果
 
 	{
@@ -470,7 +519,7 @@ description:
 <tbody valign="top">
 <tr class="row-even">
 <td>Authorization</td>
-<td>Hc-OweDeveloper DX;123456;nounce123</td>
+<td>Hc-OweDeveloper OW00004;123456;nounce123</td>
 <td>开发者验证字符串</td>
 </tr>
 </tbody>
@@ -508,6 +557,54 @@ description:
 </div>
 </div>
 
+<div class="section" id="response">
+<h4>Response</h4>
+<div class="wy-table-responsive">
+<table border="1" class="docutils">
+<colgroup>
+	<col width="12%">
+	<col width="33%">
+	<col width="37%">
+	<col width="18%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd">
+	<th class="head">名称</th>
+	<th class="head">类型</th>
+	<th class="head">描述</th>
+	<th class="head">示例值</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-odd">
+	<td>Version</td>
+	<td>string</td>
+	<td>API调用版本</td>
+	<td>V1</td>
+</tr>
+<tr class="row-even">
+	<td>Ack</td>
+	<td><a class="reference internal" href="#enumack"><em>EnumAck</em></a></td>
+	<td>返回操作是否成功</td>
+	<td>Success</td>
+</tr>
+<tr class="row-odd">
+	<td>Message</td>
+	<td>string</td>
+	<td>返回操作结果消息</td>
+	<td>失败返回错误消息</td>
+</tr>
+<tr class="row-even">
+	<td>Timestamp</td>
+	<td>datetime</td>
+	<td>调用时间(UTC)</td>
+	<td>2015-03-06T04:00:26.503+0000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
 ### 响应结果
 
 	{
@@ -519,6 +616,169 @@ description:
     },
     "Succeeded": true,
     "Error": null
+	}
+
+## 获取已上传包裹打印标签流
+
+功能：根据处理号,获取已上传包裹打印标签流。
+<div class="section" id="request">
+<a name="GetShippingLabel"></a>
+<h4>Request URL</h4>
+<p>GET api/parcels/{processCode}/label</P>
+<h4>Request Headers</h4>
+<div class="wy-table-responsive">
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%">
+<col width="40%">
+<col width="40%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd">
+<th class="head">名称</th>
+<th class="head">值</th>
+<th class="head">说明</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even">
+<td>Authorization</td>
+<td>Hc-OweDeveloper OW00004;123456;nounce123</td>
+<td>开发者验证字符串</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4>Request</h4>
+<div class="wy-table-responsive">
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%">
+<col width="10%">
+<col width="13%">
+<col width="23%">
+<col width="43%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd">
+<th class="head">名称</th>
+<th class="head">类型</th>
+<th class="head">是否必须</th>
+<th class="head">描述</th>
+<th class="head">示例值</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even">
+<td>processCode</td>
+<td>String</td>
+<td>必须</td>
+<td>包裹处理号</td>
+<td>OW1503061000001</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="section" id="response">
+<h4>Response</h4>
+<div class="wy-table-responsive">
+<table border="1" class="docutils">
+<colgroup>
+	<col width="12%">
+	<col width="33%">
+	<col width="37%">
+	<col width="18%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd">
+	<th class="head">名称</th>
+	<th class="head">类型</th>
+	<th class="head">描述</th>
+	<th class="head">示例值</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even">
+	<td>ProcessCode</td>
+	<td>string</td>
+	<td>One World包裹处理号</td>
+	<td>OW1503061000001</td>
+</tr>
+<tr class="row-odd">
+	<td>ReferenceId</td>
+	<td>string</td>
+	<td>客户订单号</td>
+	<td></td>
+</tr>
+<tr class="row-even">
+	<td>TrackingNumber</td>
+	<td>string</td>
+	<td>挂号</td>
+	<td></td>
+</tr>
+<tr class="row-even">
+	<td>LabelContent</td>
+	<td>string</td>
+	<td>标签文件内容(base64string)</td>
+	<td></td>
+</tr>
+<tr class="row-odd">
+	<td>ContentType</td>
+	<td>string</td>
+	<td>文件类型</td>
+	<td></td>
+</tr>
+<tr class="row-even">
+	<td>Length</td>
+	<td>int</td>
+	<td>文件大小</td>
+	<td></td>
+</tr>
+<tr class="row-odd">
+	<td>Version</td>
+	<td>string</td>
+	<td>API调用版本</td>
+	<td>V1</td>
+</tr>
+<tr class="row-even">
+	<td>Ack</td>
+	<td><a class="reference internal" href="#enumack"><em>EnumAck</em></a></td>
+	<td>返回操作是否成功</td>
+	<td>Success</td>
+</tr>
+<tr class="row-odd">
+	<td>Message</td>
+	<td>string</td>
+	<td>返回操作结果消息</td>
+	<td>失败返回错误消息</td>
+</tr>
+<tr class="row-even">
+	<td>Timestamp</td>
+	<td>datetime</td>
+	<td>调用时间(UTC)</td>
+	<td>2015-03-06T04:00:26.503+0000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+### 响应结果
+
+
+错误结果:
+
+    {
+    "Succeeded": false,
+    "Error": {
+        "Code": "0xFFF000",
+        "Message": "系统发生异常: "
+    },
+    "SystemError": {
+        "Message": "An error has occurred."
+    }
 	}
 
 ## 获取已上传包裹详细信息。
