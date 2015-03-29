@@ -64,7 +64,7 @@ description:
 <tbody valign="top">
 <tr class="row-even">
 <td>Authorization</td>
-<td>Hc-OweDeveloper DX;123456;nounce123</td>
+<td>Hc-OweDeveloper OW00004;123456;nounce123</td>
 <td>开发者验证字符串</td>
 </tr>
 </tbody>
@@ -395,7 +395,7 @@ description:
 <tbody valign="top">
 <tr class="row-even">
 <td>Authorization</td>
-<td>Hc-OweDeveloper DX;123456;nounce123</td>
+<td>Hc-OweDeveloper OW00004;123456;nounce123</td>
 <td>开发者验证字符串</td>
 </tr>
 </tbody>
@@ -681,105 +681,11 @@ description:
 </div>
 </div>
 
-<div class="section" id="response">
-<h4>Response</h4>
-<div class="wy-table-responsive">
-<table border="1" class="docutils">
-<colgroup>
-	<col width="12%">
-	<col width="33%">
-	<col width="37%">
-	<col width="18%">
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd">
-	<th class="head">名称</th>
-	<th class="head">类型</th>
-	<th class="head">描述</th>
-	<th class="head">示例值</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even">
-	<td>ProcessCode</td>
-	<td>string</td>
-	<td>One World包裹处理号</td>
-	<td>OW1503061000001</td>
-</tr>
-<tr class="row-odd">
-	<td>ReferenceId</td>
-	<td>string</td>
-	<td>客户订单号</td>
-	<td></td>
-</tr>
-<tr class="row-even">
-	<td>TrackingNumber</td>
-	<td>string</td>
-	<td>挂号</td>
-	<td></td>
-</tr>
-<tr class="row-even">
-	<td>LabelContent</td>
-	<td>string</td>
-	<td>标签文件内容(base64string)</td>
-	<td></td>
-</tr>
-<tr class="row-odd">
-	<td>ContentType</td>
-	<td>string</td>
-	<td>文件类型</td>
-	<td></td>
-</tr>
-<tr class="row-even">
-	<td>Length</td>
-	<td>int</td>
-	<td>文件大小</td>
-	<td></td>
-</tr>
-<tr class="row-odd">
-	<td>Version</td>
-	<td>string</td>
-	<td>API调用版本</td>
-	<td>V1</td>
-</tr>
-<tr class="row-even">
-	<td>Ack</td>
-	<td><a class="reference internal" href="#enumack"><em>EnumAck</em></a></td>
-	<td>返回操作是否成功</td>
-	<td>Success</td>
-</tr>
-<tr class="row-odd">
-	<td>Message</td>
-	<td>string</td>
-	<td>返回操作结果消息</td>
-	<td>失败返回错误消息</td>
-</tr>
-<tr class="row-even">
-	<td>Timestamp</td>
-	<td>datetime</td>
-	<td>调用时间(UTC)</td>
-	<td>2015-03-06T04:00:26.503+0000</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+
 
 ### 响应结果
+如果标签存在,则返回文件流. 否则抛出 404-No found 错误.
 
-
-错误结果:
-
-    {
-    "Succeeded": false,
-    "Error": {
-        "Code": "0xFFF000",
-        "Message": "系统发生异常: "
-    },
-    "SystemError": {
-        "Message": "An error has occurred."
-    }
-	}
 
 ## 获取已上传包裹详细信息。
 
@@ -806,7 +712,7 @@ description:
 <tbody valign="top">
 <tr class="row-even">
 <td>Authorization</td>
-<td>HC-DX;A;C</td>
+<td>Hc-OweDeveloper OW00004;123456;nounce123</td>
 <td>开发者验证字符串</td>
 </tr>
 </tbody>
@@ -1157,7 +1063,7 @@ Cancel = 己取消</td>
 <td>String</td>
 <td>必须</td>
 <td>开发者验证字符串</td>
-<td>Hc-OweDeveloper DX;123456;nounce123</td>
+<td>Hc-OweDeveloper OW00004;123456;nounce123</td>
 </tr>
 </tbody>
 </table></div>
@@ -1250,7 +1156,7 @@ Cancel = 己取消</td>
 <td>String</td>
 <td>必须</td>
 <td>开发者验证字符串</td>
-<td>Hc-OweDeveloper DX;123456;nounce123</td>
+<td>Hc-OweDeveloper OW00004;123456;nounce123</td>
 </tr>
 </tbody>
 </table></div>
